@@ -25,6 +25,31 @@ A modular, production-ready Infrastructure-as-Code (IaC) repository that provisi
 
 ---
 
+## 🏛️ System Architecture Flow
+
+```mermaid
+flowchart TD
+    Module["Reusable VPC Module (Terraform/Module/VPC)"]
+
+    subgraph Dev["Dev Environment (ap-south-1)"]
+        DevVPC["dev-vpc (10.10.0.0/16)"]
+    end
+
+    subgraph QA["QA Environment (ap-south-1)"]
+        QAVPC["QA-vpc (10.11.0.0/16)"]
+    end
+
+    subgraph Prod["Production Environment (ap-south-1)"]
+        ProdVPC["Prod-vpc (10.12.0.0/16)"]
+    end
+
+    Module -->|Instantiate| DevVPC
+    Module -->|Instantiate| QAVPC
+    Module -->|Instantiate| ProdVPC
+```
+
+---
+
 ## 📊 Environment Breakdown
 
 | Environment | VPC Name | CIDR Block | AWS Region | Directory Path |
